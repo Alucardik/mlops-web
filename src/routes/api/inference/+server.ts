@@ -1,5 +1,12 @@
+import { INFERENCE_STUB } from "$env/static/private"
 import type { RequestHandler } from "@sveltejs/kit"
 
 export const GET: RequestHandler = () => {
-    return new Response(String(Math.random() * 10))
+    if (INFERENCE_STUB) {
+        return new Response(String(Math.random() * (500 - 50) + 50))
+    }
+
+    return new Response(null, {
+        status: 501,
+    })
 }

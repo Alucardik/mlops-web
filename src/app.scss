@@ -1,0 +1,24 @@
+:root {
+  --color-background-primary: #F4F4F4;
+  --color-background-secondary: #ACEF81;
+  --color-background-tertiary: #0E41D2;
+  --color-text-primary: #000;
+  --color-text-secondary: #FFF;
+  --color-text-accent: #0F5DE4;
+  --color-line-generic: rgba(0, 0, 0, 0.15);
+
+  --border-radius: 10px;
+  --border-radius-small: 5px;
+}
+
+html {
+  height: 100vh;
+}
+
+body {
+  display: flex;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-background-secondary);
+}

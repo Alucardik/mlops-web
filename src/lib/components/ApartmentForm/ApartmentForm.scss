@@ -1,0 +1,26 @@
+.apartment-form {
+  width: 700px;
+  padding: 10px 10px 20px;
+  background-color: var(--color-background-primary);
+  border-radius: var(--border-radius);
+
+  &__fields-row {
+    display: flex;
+    margin-bottom: 10px;
+    gap: 8px;
+    border: none;
+    border-bottom: 2px solid var(--color-line-generic);
+    justify-content: center;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__input-field {
+    width: 320px;
+    border: solid 1px var(--color-line-generic);
+    border-radius: var(--border-radius-small);
+    background-color: inherit;
+  }
+}
