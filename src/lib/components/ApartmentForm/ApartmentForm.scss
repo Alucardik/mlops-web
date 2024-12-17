@@ -1,26 +1,51 @@
 .apartment-form {
   width: 700px;
-  padding: 10px 10px 20px;
+  padding: 10px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: var(--color-background-primary);
   border-radius: var(--border-radius);
 
   &__fields-row {
-    display: flex;
+    width: calc(100% - 40px);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
     margin-bottom: 10px;
     gap: 8px;
     border: none;
     border-bottom: 2px solid var(--color-line-generic);
     justify-content: center;
 
-    &:last-of-type {
-      margin-bottom: 0;
-    }
+
+  }
+
+  &__input-name {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: var(--font-size-normal);
   }
 
   &__input-field {
-    width: 320px;
+    width: 100%;
     border: solid 1px var(--color-line-generic);
     border-radius: var(--border-radius-small);
     background-color: inherit;
+    font-family: inherit;
+  }
+
+  &__submit-button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    background-color: var(--color-text-accent);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    border-radius: var(--border-radius-small);
+
+    &:hover {
+      background-color: var(--color-background-tertiary);
+    }
   }
 }

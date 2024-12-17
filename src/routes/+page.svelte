@@ -1,18 +1,61 @@
 <script lang="ts">
     import ApartmentForm from "$lib/components/ApartmentForm/ApartmentForm.svelte";
-    import type { PageData } from "./$types"
 
-    let { data }: { data: PageData } = $props()
+    let currentPrice: number = $state(0)
+
+    const onFormSubmit = async (modelInput: {
+        neighbourhood: string,
+        propertyType: string,
+        amenities: string[],
+        bedrooms: number,
+        bathrooms: number,
+        beds: number,
+        guests: number,
+        minNights: number,
+        listingsCount: number,
+    }) => {
+        console.log(modelInput)
+        const resp = await fetch("/api/inference", {
+            method: "POST",
+            body: JSON.stringify(modelInput),
+        })
+
+        currentPrice = parseInt(await resp.text())
+    }
 </script>
 
 <div class="model-params">
-    <ApartmentForm />
+    <h1 class="header">
+        Calculate rent price per night for Barcelona's real estate
+    </h1>
+    <ApartmentForm {onFormSubmit} />
+    <div class="price">Estimated price: <span>{currentPrice}</span>$</div>
 </div>
 
-<style lang="scss">
+<style>
     .model-params {
       display: flex;
+      flex-direction: column;
+      align-items: center;
       margin: auto;
       padding-bottom: 200px;
+    }
+
+    .header {
+        color: var(--color-text-accent);
+        text-align: center;
+    }
+
+    .price {
+        width: 350px;
+        padding: 10px;
+        margin-top: 15px;
+        background-color: var(--color-background-primary);
+        text-align: center;
+        border-radius: var(--border-radius);
+
+        span {
+            color: var(--color-text-accent);
+        }
     }
 </style>
