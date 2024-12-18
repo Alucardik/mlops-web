@@ -1,26 +1,21 @@
 <script lang="ts">
     import ApartmentForm from "$lib/components/ApartmentForm/ApartmentForm.svelte";
+    import type { InferenceParams } from "$lib/model/request"
 
     let currentPrice: number = $state(0)
 
-    const onFormSubmit = async (modelInput: {
-        neighbourhood: string,
-        propertyType: string,
-        amenities: string[],
-        bedrooms: number,
-        bathrooms: number,
-        beds: number,
-        guests: number,
-        minNights: number,
-        listingsCount: number,
-    }) => {
+    const onFormSubmit = async (modelInput: InferenceParams) => {
         console.log(modelInput)
         const resp = await fetch("/api/inference", {
             method: "POST",
             body: JSON.stringify(modelInput),
         })
 
-        currentPrice = parseInt(await resp.text())
+        const res = await resp.text()
+
+        console.log(res)
+
+        currentPrice = parseInt(res) || 10
     }
 </script>
 

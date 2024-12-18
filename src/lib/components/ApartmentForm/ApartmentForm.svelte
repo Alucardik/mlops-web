@@ -1,9 +1,10 @@
 <script lang="ts">
     import "./ApartmentForm.scss"
-    import { neighbourhoods, propertyTypes, amenities } from "$lib/model/params"
+    import { neighbourhoods, propertyTypes, amenities, roomTypes } from "$lib/model/params"
 
     let chosenNeighbourhood: string = $state("")
     let chosenPropertyType: string = $state("")
+    let chosenRoomType: string = $state("")
     let chosenAmenities: string[] = $state([])
     let bedrooms: number = $state(1)
     let bathrooms: number = $state(1)
@@ -12,12 +13,13 @@
     let minNights: number = $state(1)
     let listingsCount: number = $state(1)
 
-    const { onFormSubmit } = $props();
+    const { onFormSubmit } = $props()
 
     const onSubmit = () => {
         onFormSubmit({
             neighbourhood: chosenNeighbourhood,
             propertyType: chosenPropertyType,
+            roomType: chosenRoomType,
             amenities: chosenAmenities,
             bedrooms,
             bathrooms,
@@ -25,7 +27,7 @@
             guests,
             minNights,
             listingsCount,
-        });
+        })
     }
 </script>
 
@@ -44,6 +46,14 @@
             <select required bind:value={chosenPropertyType} class="apartment-form__input-field">
                 {#each propertyTypes as propertyType}
                     <option value={propertyType}>{propertyType}</option>
+                {/each}
+            </select>
+        </label>
+        <label class="apartment-form__input-name">
+            <span>Room type</span>
+            <select required bind:value={chosenRoomType} class="apartment-form__input-field">
+                {#each roomTypes as roomType}
+                    <option value={roomType}>{roomType}</option>
                 {/each}
             </select>
         </label>

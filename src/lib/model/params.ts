@@ -99,8 +99,11 @@ const amenities = [
     "wifi", "window_guards",
 ]
 
+const roomTypes = ["Entire home/apt", "Private room", "Shared room"]
+
 export {
     neighbourhoods,
     propertyTypes,
     amenities,
+    roomTypes,
 }
