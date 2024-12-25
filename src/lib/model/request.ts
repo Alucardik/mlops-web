@@ -21,38 +21,16 @@ export const CreateInferenceRequest = (params: InferenceParams): string => {
     // 'availability_60', 'availability_90', 'availability_365',
     // 'number_of_reviews_ltm', 'review_scores_rating' and then has_{amenity}
 
-    const data: (number | string)[] = [
-        0, 1, params.listingsCount, neighbourhoods.indexOf(params.neighbourhood)+1,
-        41.40889, 2.18555, propertyTypes.indexOf(params.propertyType)+1, roomTypes.indexOf(params.roomType)+1, params.guests,
-        params.bathrooms, params.beds, params.minNights, 1,
-        1, 1, 1,
-        85, 85,
-    ]
-
-    const selectedAmenitiesSet = new Set()
-
-    for (const amenity of params.amenities) {
-        selectedAmenitiesSet.add(amenity)
-    }
-
-    for (const amenity of amenities) {
-        if (selectedAmenitiesSet.has(amenity)) {
-            data.push(1)
-            continue
-        }
-
-        data.push(0)
-    }
-
-    // fake
-    data.push(0)
-
     return JSON.stringify({
-        inputs: [{
-            name: "predict",
-            shape: [data.length],
-            datatype: "FP32",
-            data,
-        }]
+        "neighbourhood": params.neighbourhood,
+        "room_type": params.roomType,
+        "property_type": params.propertyType,
+        "bedrooms": params.bedrooms,
+        "accommodates": params.guests,
+        "bathrooms": params.bathrooms,
+        "minimum_nights": params.minNights,
+        "host_listings_count": params.listingsCount,
+        "beds": params.beds,
+        amenities: params.amenities,
     })
 }

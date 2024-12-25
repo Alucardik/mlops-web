@@ -1,4 +1,4 @@
-import { INFERENCE_STUB } from "$env/static/private"
+import { INFERENCE_STUB, API_ENDPOINT, MODEL_VERSION } from "$env/static/private"
 import type { RequestHandler } from "@sveltejs/kit"
 import { type InferenceParams, CreateInferenceRequest } from "$lib/model/request"
 
@@ -12,9 +12,12 @@ export const POST: RequestHandler = async ( { request } ) => {
         return new Response(String(Math.random() * (1500 - 20) + 50))
     }
 
+    const apiEndpoint = API_ENDPOINT || "http://localhost:5000"
+    const modelVersion = MODEL_VERSION || "v1"
+
     try {
-        const resp = await fetch("http://localhost:8080/v2/models/random-forest-rent/versions/v0.1.0/infer", {
-            method: "POST",
+        const resp = await fetch(`${apiEndpoint}/predict/${modelVersion}`, {
+            method: "PUT",
             body: CreateInferenceRequest(params),
             headers: {
                 "Content-Type": "application/json",

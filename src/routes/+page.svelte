@@ -15,7 +15,7 @@
 
         console.log(res)
 
-        currentPrice = parseInt(res) || 10
+        currentPrice = parseFloat(res) || 10
     }
 </script>
 

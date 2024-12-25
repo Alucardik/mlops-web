@@ -62,7 +62,7 @@
         <label class="apartment-form__input-name">
             <span>Amenities</span>
             <select multiple bind:value={chosenAmenities} class="apartment-form__input-field">
-                {#each amenities as amenity}
+                {#each amenities.sort() as amenity}
                     <option value={amenity}>{amenity}</option>
                 {/each}
             </select>
