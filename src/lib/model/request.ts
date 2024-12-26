@@ -1,5 +1,3 @@
-import { neighbourhoods, propertyTypes, roomTypes, amenities } from "./params"
-
 export interface InferenceParams {
     neighbourhood: string,
     propertyType: string,

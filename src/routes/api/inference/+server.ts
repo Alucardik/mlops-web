@@ -1,6 +1,7 @@
-import { INFERENCE_STUB, API_ENDPOINT, MODEL_VERSION } from "$env/static/private"
+import { INFERENCE_STUB, USE_EMBEDDED_LIN_MODEL, API_ENDPOINT, MODEL_VERSION } from "$env/static/private"
 import type { RequestHandler } from "@sveltejs/kit"
 import { type InferenceParams, CreateInferenceRequest } from "$lib/model/request"
+import { RunLinRegression } from "$lib/model/lin_regression";
 
 
 export const POST: RequestHandler = async ( { request } ) => {
@@ -10,6 +11,10 @@ export const POST: RequestHandler = async ( { request } ) => {
 
     if (INFERENCE_STUB) {
         return new Response(String(Math.random() * (1500 - 20) + 50))
+    }
+
+    if (USE_EMBEDDED_LIN_MODEL) {
+        return new Response(String(RunLinRegression(params)))
     }
 
     const apiEndpoint = API_ENDPOINT || "http://localhost:5000"
